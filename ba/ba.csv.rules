@@ -1,0 +1,7 @@
+separator ;
+fields buchungsdatum, valutadatum, buchungstext, betrag
+date %buchungsdatum
+description %buchungstext
+amount %betrag EUR
+date-format %d.%m.%Y
+include match.rules

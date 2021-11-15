@@ -1,0 +1,5 @@
+separator ;
+fields date, value_date, process, description, amount
+date-format %d.%m.%Y
+amount %amount EUR
+include match.rules

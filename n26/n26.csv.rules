@@ -1,0 +1,89 @@
+fields date, payee, account, type, description, amount, amount_foreign, currency_foreign, exchange_rate
+date-format %Y-%m-%d
+amount %amount EUR
+description %payee %description
+
+if %amount_foreign .+
+  amount2 -%amount_foreign %currency_foreign
+  account3 conversion:n26:EUR:%currency_foreign
+  comment3 rate:%exchange_rate
+
+# Transaction Type
+
+if %type Income
+  account2 income:unknown
+  comment type:income
+
+# IMPORTANT: Keep "unknown" in the account name for matching.
+if %type MasterCard Payment
+  account2 expenses:unknown:n26:master
+  comment type:master
+
+# IMPORTANT: Keep "unknown" in the account name for matching.
+if %type Maestro Payment
+  account2 expenses:unknown:n26:maestro
+  comment type:maestro
+
+# IMPORTANT: Keep "unknown" in the account name for matching.
+if %type Outgoing Transfer
+  account2 expenses:unknown:n26:transfer
+  comment type:transfer
+
+if %type unknown
+  comment type:unknown
+
+if %type Direct Debit
+  account2 expenses:unknown:n26:direct-debit
+  comment type:debit
+
+if %type N26 Referral
+  account2 income:referral:n26
+  comment type:referral
+
+if %account .+
+  comment2 iban:%account
+
+# Category
+# ATM, Bars & Restaurants, Business expenses, Family & Friends,
+# Food & Groceries, Healthcare & Drug Stores, Household & Utilities,
+# Income, Insurances & Finances, Leisure & Entertainment, Media & Electronics,
+# Miscallaneous, N26 Referrals, Salary, Savings & Investments, Shopping
+# Subscriptions & Donations, Tax & fines, Transport & Car, Travel & Holidays
+
+if %category Income
+  account2 income:unknown
+
+if %category Business expenses
+  account2 expenses:unknown:business
+
+if %category Food & groceries
+  account2 expenses:unknown:food_groceries
+
+if %category Bars & restaurants
+  account2 expenses:unknown:bars_restaurants
+
+if %category Transport & car
+  account2 expenses:unknown:transport_car
+
+if %category Travel & Holiday
+  account2 expenses:unknown:travel_holidays
+
+if %category Healthcare & Drug Stores
+  account2 expenses:unknown:healthcare_drug_stores
+
+if %category Media & Electronics
+  account2 expenses:unknown:media_electronics
+
+if %category Education
+  account2 expenses:unknown:education
+
+if %category Salary
+  account2 income:unknown:salary
+
+if %category Shopping
+  account2 expenses:unknown:shopping
+
+if %category ATM
+  account2 cash
+
+include match.rules

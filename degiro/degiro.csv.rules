@@ -1,0 +1,6 @@
+fields date, time, date_value, product, isin, description, _, currency, unknown, fx, amountx, c, balance, code
+date-format %d-%m-%Y
+amount1 %amountx
+description %product %description
+comment time:%time, isin:%isin, currency:%c
+include match.rules

@@ -1,0 +1,6 @@
+fields description, date, currency, amount1-in, amount1-out
+account1 assets:ing:checking
+date-format %Y-%m-%d
+account2 unknown
+#amount %amount EUR
+include ../common.rules

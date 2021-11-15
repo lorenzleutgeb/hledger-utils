@@ -1,0 +1,7 @@
+skip 1
+separator ;
+fields date, date_value, bic, iban, description, code, amount, _, account, account_name
+date-format %d.%m.%Y
+amount %amount EUR
+comment1 bic:%bic, iban:%iban
+include match.rules

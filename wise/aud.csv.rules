@@ -1,0 +1,5 @@
+fields code, date, amount, _, long_description, reference, running, from, to, rate, payer_name, payee_name, payee_account, merchant, last, name, fees
+description %payee_name%merchant
+date-format %d-%m-%Y
+amount %amount AUD
+include aud.match.rules
